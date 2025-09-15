@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>新test9.15</title>
+    <link href="/2025/09/15/%E6%96%B0test9-15/"/>
+    <url>/2025/09/15/%E6%96%B0test9-15/</url>
+    
+    <content type="html"><![CDATA[<p>这是一篇测试文章</p><p><img src="C:\Users\LZL\Desktop\万万不可删hexo-blog\hexo-blog\source_posts\新test9-15\图1.jpg" alt="图片引用方法二"></p><p><img src="/%E6%96%B0test9-15/%E5%9B%BE2.png" alt="图片引用方法三"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>测试分类</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>标签1</tag>
+      
+      <tag>标签2</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>creatnewblog</title>
     <link href="/2025/07/26/creatnewblog/"/>
     <url>/2025/07/26/creatnewblog/</url>
