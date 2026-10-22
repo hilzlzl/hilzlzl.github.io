@@ -12,10 +12,14 @@ font:
 custom_css: /css/custom.css
 custom_js: /js/custom.js
 color:
-  body_bg_color: '#f5f6f8'
-  body_bg_color_dark: '#151b24'
-  navbar_bg_color: '#152333'
-  navbar_bg_color_dark: '#111c29'
+  body_bg_color: '#f7f6f2'
+  body_bg_color_dark: '#20231f'
+  navbar_bg_color: '#f7f6f2'
+  navbar_bg_color_dark: '#252923'
+  navbar_text_color: '#3c433c'
+  navbar_text_color_dark: '#e1e4db'
+  subtitle_color: '#363e37'
+  subtitle_color_dark: '#e7e9e1'
   text_color: '#263445'
   sec_text_color: '#6a7686'
   board_color: '#ffffff'
@@ -34,7 +38,7 @@ fun_features:
   anchorjs:
     enable: true
 navbar:
-  blog_title: hilzl
+  blog_title: 研究与工程
   menu:
     - { key: home, name: 首页, link: / }
     - { key: projects, name: 项目, link: /projects/ }

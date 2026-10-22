@@ -1,18 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1920" height="960" viewBox="0 0 1920 960">
   <defs>
-    <linearGradient id="base" x1="0" y1="0" x2="1" y2="0.8">
-      <stop stop-color="#142131"/>
-      <stop offset="1" stop-color="#2b4253"/>
-    </linearGradient>
-    <pattern id="grid" width="96" height="96" patternUnits="userSpaceOnUse">
-      <path d="M96 0H0V96" fill="none" stroke="#a1b4c2" stroke-opacity=".045"/>
-    </pattern>
+    <filter id="daylight" x="-50%" y="-100%" width="200%" height="300%">
+      <feGaussianBlur stdDeviation="45"/>
+    </filter>
   </defs>
-  <path fill="url(#base)" d="M0 0h1920v960H0z"/>
-  <path fill="url(#grid)" d="M0 0h1920v960H0z"/>
-  <g fill="none" stroke="#a7c2d3" stroke-opacity=".12">
-    <circle cx="1680" cy="540" r="350"/>
-    <circle cx="1680" cy="540" r="470"/>
-    <path d="M1020 960 1740 0M1240 960 1920 120"/>
+  <path fill="#eeede6" d="M0 0h1920v960H0z"/>
+  <!-- 轻微的日光与窗影；留白优先，不使用网格或科技装饰。 -->
+  <g filter="url(#daylight)">
+    <path fill="#fffdf6" fill-opacity=".65" d="M-200-100H940L340 1100H-200z"/>
+    <path fill="#a8ad9d" fill-opacity=".11" d="M1510-140h180L1090 1100H910z"/>
+    <path fill="#a8ad9d" fill-opacity=".08" d="M1910-140h90v800l-250 440h-440z"/>
   </g>
 </svg>
