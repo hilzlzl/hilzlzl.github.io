@@ -12,24 +12,30 @@ font:
 custom_css: /css/custom.css
 custom_js: /js/custom.js
 color:
-  body_bg_color: '#f7f6f2'
-  body_bg_color_dark: '#20231f'
-  navbar_bg_color: '#f7f6f2'
-  navbar_bg_color_dark: '#252923'
-  navbar_text_color: '#3c433c'
-  navbar_text_color_dark: '#e1e4db'
-  subtitle_color: '#363e37'
-  subtitle_color_dark: '#e7e9e1'
-  text_color: '#263445'
-  sec_text_color: '#6a7686'
-  board_color: '#ffffff'
-  board_color_dark: '#1d2733'
-  post_text_color: '#334155'
-  post_heading_color: '#182a3c'
-  post_link_color: '#376883'
-  link_hover_color: '#376883'
-  link_hover_color_dark: '#8bbbd4'
-  line_color: '#e8edf1'
+  body_bg_color: '#e7eae6'
+  body_bg_color_dark: '#20241e'
+  navbar_bg_color: '#aab4a7'
+  navbar_bg_color_dark: '#2c322a'
+  navbar_text_color: '#31372f'
+  navbar_text_color_dark: '#d7dcd6'
+  subtitle_color: '#31372f'
+  subtitle_color_dark: '#d7dcd6'
+  text_color: '#31372f'
+  text_color_dark: '#d7dcd6'
+  sec_text_color: '#5d6959'
+  sec_text_color_dark: '#aab4a7'
+  board_color: '#f7f8f7'
+  board_color_dark: '#2a2f28'
+  post_text_color: '#3d453b'
+  post_text_color_dark: '#d7dcd6'
+  post_heading_color: '#31372f'
+  post_heading_color_dark: '#d7dcd6'
+  post_link_color: '#4c6545'
+  post_link_color_dark: '#a9bda2'
+  link_hover_color: '#4c6545'
+  link_hover_color_dark: '#a9bda2'
+  line_color: '#dce1d9'
+  line_color_dark: '#424b3e'
 fun_features:
   typing:
     enable: false
@@ -38,7 +44,8 @@ fun_features:
   anchorjs:
     enable: true
 navbar:
-  blog_title: 研究与工程
+  # 暂不展示站名；CSS 隐藏品牌区域，导航中的「首页」保留返回入口。
+  blog_title: ''
   menu:
     - { key: home, name: 首页, link: / }
     - { key: projects, name: 项目, link: /projects/ }
