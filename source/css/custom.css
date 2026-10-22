@@ -1,15 +1,15 @@
 /* 自定义外观集中在这里；无需修改 node_modules 中的主题文件。 */
 html { scroll-behavior: smooth; }
 :root {
-  /* 和背景一致的 H=105°、S=8%，仅调整明度与透明度。 */
-  --nav-surface: hsla(105, 8%, 68%, .72);
-  --nav-surface-scrolled: hsla(105, 8%, 68%, .92);
-  --nav-hairline: hsla(105, 8%, 25%, .08);
+  /* 从冰川照片提取深蓝底色，保持菜单在亮雪面上清晰。 */
+  --nav-surface: rgba(23, 54, 76, .78);
+  --nav-surface-scrolled: rgba(23, 54, 76, .94);
+  --nav-hairline: rgba(222, 235, 245, .12);
 }
 [data-user-color-scheme="dark"] {
-  --nav-surface: hsla(105, 8%, 18%, .72);
-  --nav-surface-scrolled: hsla(105, 8%, 18%, .92);
-  --nav-hairline: hsla(105, 8%, 85%, .08);
+  --nav-surface: rgba(16, 35, 50, .82);
+  --nav-surface-scrolled: rgba(16, 35, 50, .96);
+  --nav-hairline: rgba(222, 235, 245, .12);
 }
 .navbar {
   box-shadow: none;
@@ -24,19 +24,24 @@ html { scroll-behavior: smooth; }
 .navbar .navbar-toggler { margin-left: auto; }
 .navbar .nav-item { margin-left: .4rem; }
 .navbar .nav-link { font-size: .88rem; letter-spacing: .06em; }
+.navbar .nav-item .nav-link:hover, .navbar .nav-item .nav-link:focus-visible {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: .35em;
+}
 .navbar.scrolling-navbar.top-nav-collapse, .navbar.navbar-col-show {
   background-color: var(--nav-surface-scrolled);
   box-shadow: none;
 }
-.banner { background-color: hsl(105, 8%, 73%); }
-[data-user-color-scheme="dark"] .banner { background-image: none !important; background-color: hsl(105, 8%, 22%); }
-.banner-text { letter-spacing: .06em; }
+.banner { background-color: #17364c; background-position: 58% 48% !important; }
+[data-user-color-scheme="dark"] .banner .mask { background-color: rgba(0, 0, 0, .64) !important; }
+.banner-text { letter-spacing: .06em; text-shadow: 0 2px 10px rgba(0, 18, 33, .35); }
 .banner-text .h2 { font-size: clamp(1.6rem, 3vw, 2.5rem); line-height: 1.85; font-weight: 400; text-wrap: balance; }
-.banner-text::before { content: '研究笔记 / 工程实践'; display: block; color: var(--sec-text-color); font-size: .75rem; letter-spacing: .18em; margin-bottom: 1.4rem; }
-.banner-text::after { content: 'AI Agent · 可靠性工程 · 研究实践'; display: block; color: var(--sec-text-color); font-size: .86rem; font-weight: 400; letter-spacing: .08em; margin-top: 1.25rem; }
+.banner-text::before { content: '研究笔记 / 工程实践'; display: block; color: #f2f6f9; font-size: .75rem; letter-spacing: .18em; margin-bottom: 1.4rem; }
+.banner-text::after { content: 'AI Agent · 可靠性工程 · 研究实践'; display: block; color: #f2f6f9; font-size: .86rem; font-weight: 400; letter-spacing: .08em; margin-top: 1.25rem; }
 body:not(.home-page) .banner-text::after { display: none; }
 body:not(.home-page) .banner-text::before { display: none; }
-#board { box-shadow: 0 3px 22px rgba(57,61,46,.025); border-radius: 6px; border: 1px solid hsla(105,8%,38%,.10); padding-top: 2.5rem; }
+#board { box-shadow: 0 3px 22px rgba(57,61,46,.025); border-radius: 6px; border: 1px solid rgba(99,118,135,.12); padding-top: 2.5rem; }
 .home-page #board { margin-top: -2rem !important; position: relative; }
 .index-card { padding-top: 2rem; padding-bottom: 2.25rem; border-bottom: 1px solid var(--line-color); }
 .index-card:last-child { border-bottom: 0; }
@@ -46,19 +51,20 @@ body:not(.home-page) .banner-text::before { display: none; }
 .markdown-body { line-height: 1.95; overflow-wrap: anywhere; }
 .markdown-body h2 { margin-top: 2.3em; padding-bottom: .6em; }
 .markdown-body h3 { margin-top: 1.8em; }
-.markdown-body blockquote { border-left: 3px solid #8c9d86; background: rgba(140,157,134,.06); padding: .8rem 1.2rem; }
+.markdown-body blockquote { border-left: 3px solid #7899af; background: rgba(123,153,175,.06); padding: .8rem 1.2rem; }
 .markdown-body table { font-size: .87rem; }
-.markdown-body table th { background: rgba(140,157,134,.08); }
+.markdown-body table th { background: rgba(123,153,175,.08); }
 .markdown-body a { text-underline-offset: 4px; }
 .post-metas { letter-spacing: .01em; }
 .project-label { color: var(--sec-text-color); font-size: .73rem; font-weight: 600; letter-spacing: .15em; }
 .project-links { display: flex; flex-wrap: wrap; gap: .65rem; margin: 1.5rem 0 2rem; }
 .project-links a { display: inline-block; padding: .45rem 1rem; border: 1px solid var(--line-color); border-radius: 4px; font-size: .85rem; text-decoration: none; }
-.project-links a:hover { background: rgba(140,157,134,.09); }
+.project-links a:hover { background: rgba(123,153,175,.09); }
 footer { font-size: .76rem; line-height: 1.9; color: var(--sec-text-color); padding: 2.6rem 0; }
 .scroll-down-bar { opacity: .55; }
 @media (max-width: 767px) {
   .navbar .nav-item { margin-left: 0; }
+  .banner { background-position: 62% center !important; }
   .banner-text { padding: 0 1.3rem; }
   .banner-text::before { font-size: .67rem; letter-spacing: .12em; margin-bottom: 1.2rem; }
   .banner-text::after { font-size: .73rem; }
@@ -69,11 +75,11 @@ footer { font-size: .76rem; line-height: 1.9; color: var(--sec-text-color); padd
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-user-color-scheme]) {
-    --nav-surface: hsla(105, 8%, 18%, .72);
-    --nav-surface-scrolled: hsla(105, 8%, 18%, .92);
-    --nav-hairline: hsla(105, 8%, 85%, .08);
+    --nav-surface: rgba(16, 35, 50, .82);
+    --nav-surface-scrolled: rgba(16, 35, 50, .96);
+    --nav-hairline: rgba(222, 235, 245, .12);
   }
-  :root:not([data-user-color-scheme]) .banner { background-image: none !important; background-color: hsl(105, 8%, 22%); }
+  :root:not([data-user-color-scheme]) .banner .mask { background-color: rgba(0, 0, 0, .64) !important; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
