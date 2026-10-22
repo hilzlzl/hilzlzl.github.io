@@ -14,9 +14,9 @@ custom_js: /js/custom.js
 color:
   body_bg_color: '#f0f5f7'
   body_bg_color_dark: '#18212a'
-  navbar_bg_color: '#dce8ee'
-  navbar_bg_color_dark: '#17364c'
-  navbar_text_color: '#2c4859'
+  navbar_bg_color: '#caddf6'
+  navbar_bg_color_dark: '#162741'
+  navbar_text_color: '#284367'
   navbar_text_color_dark: '#d9e3eb'
   subtitle_color: '#ffffff'
   subtitle_color_dark: '#ffffff'

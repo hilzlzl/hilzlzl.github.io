@@ -1,14 +1,14 @@
 /* 自定义外观集中在这里；无需修改 node_modules 中的主题文件。 */
 html { scroll-behavior: smooth; }
 :root {
-  /* 浅冰川蓝底与深色菜单字，保留半透明层次。 */
-  --nav-surface: rgba(220, 232, 238, .88);
-  --nav-surface-scrolled: rgba(230, 239, 243, .97);
-  --nav-hairline: rgba(67, 97, 115, .12);
+  /* 偏纯蓝的冰川蓝底与深色菜单字，保留半透明层次。 */
+  --nav-surface: rgba(202, 221, 246, .88);
+  --nav-surface-scrolled: rgba(218, 232, 250, .97);
+  --nav-hairline: rgba(60, 91, 132, .12);
 }
 [data-user-color-scheme="dark"] {
-  --nav-surface: rgba(16, 35, 50, .82);
-  --nav-surface-scrolled: rgba(16, 35, 50, .96);
+  --nav-surface: rgba(22, 39, 65, .82);
+  --nav-surface-scrolled: rgba(22, 39, 65, .96);
   --nav-hairline: rgba(222, 235, 245, .12);
 }
 .navbar {
@@ -83,8 +83,8 @@ footer { font-size: .76rem; line-height: 1.9; color: var(--sec-text-color); padd
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-user-color-scheme]) {
-    --nav-surface: rgba(16, 35, 50, .82);
-    --nav-surface-scrolled: rgba(16, 35, 50, .96);
+    --nav-surface: rgba(22, 39, 65, .82);
+    --nav-surface-scrolled: rgba(22, 39, 65, .96);
     --nav-hairline: rgba(222, 235, 245, .12);
   }
   :root:not([data-user-color-scheme]) .banner .mask { background-color: rgba(0, 0, 0, .36) !important; }
