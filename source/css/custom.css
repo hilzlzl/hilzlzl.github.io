@@ -34,7 +34,7 @@ html { scroll-behavior: smooth; }
   box-shadow: none;
 }
 .banner { background-color: #17364c; background-position: 58% 48% !important; }
-[data-user-color-scheme="dark"] .banner .mask { background-color: rgba(0, 0, 0, .64) !important; }
+[data-user-color-scheme="dark"] .banner .mask { background-color: rgba(0, 0, 0, .54) !important; }
 .banner-text { letter-spacing: .06em; text-shadow: 0 2px 10px rgba(0, 18, 33, .35); }
 .banner-text .h2 { font-size: clamp(1.6rem, 3vw, 2.5rem); line-height: 1.85; font-weight: 400; text-wrap: balance; }
 .banner-text::before { content: '研究笔记 / 工程实践'; display: block; color: #f2f6f9; font-size: .75rem; letter-spacing: .18em; margin-bottom: 1.4rem; }
@@ -79,7 +79,7 @@ footer { font-size: .76rem; line-height: 1.9; color: var(--sec-text-color); padd
     --nav-surface-scrolled: rgba(16, 35, 50, .96);
     --nav-hairline: rgba(222, 235, 245, .12);
   }
-  :root:not([data-user-color-scheme]) .banner .mask { background-color: rgba(0, 0, 0, .64) !important; }
+  :root:not([data-user-color-scheme]) .banner .mask { background-color: rgba(0, 0, 0, .54) !important; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

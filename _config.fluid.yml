@@ -58,7 +58,7 @@ navbar:
 index:
   banner_img: /img/antarctic-penguins.jpg
   banner_img_height: 64
-  banner_mask_alpha: 0.56
+  banner_mask_alpha: 0.46
   slogan:
     enable: true
     text: 让研究可复现，让系统更可靠。
@@ -73,7 +73,7 @@ index:
 post:
   banner_img: /img/antarctic-penguins.jpg
   banner_img_height: 48
-  banner_mask_alpha: 0.56
+  banner_mask_alpha: 0.46
   meta:
     date:
       format: YYYY-MM-DD
@@ -95,15 +95,15 @@ post:
 archive:
   banner_img: /img/antarctic-penguins.jpg
   banner_img_height: 42
-  banner_mask_alpha: 0.56
+  banner_mask_alpha: 0.46
 category:
   banner_img: /img/antarctic-penguins.jpg
   banner_img_height: 42
-  banner_mask_alpha: 0.56
+  banner_mask_alpha: 0.46
 tag:
   banner_img: /img/antarctic-penguins.jpg
   banner_img_height: 42
-  banner_mask_alpha: 0.56
+  banner_mask_alpha: 0.46
   tagcloud:
     min_font: 16
     max_font: 24
@@ -112,7 +112,7 @@ tag:
 about:
   banner_img: /img/antarctic-penguins.jpg
   banner_img_height: 42
-  banner_mask_alpha: 0.56
+  banner_mask_alpha: 0.46
   avatar: /img/avatar.svg
   name: hilzl
   intro: 研究与工程 · 记录问题、实现与验证。
@@ -121,11 +121,11 @@ about:
 page:
   banner_img: /img/antarctic-penguins.jpg
   banner_img_height: 42
-  banner_mask_alpha: 0.56
+  banner_mask_alpha: 0.46
 page404:
   banner_img: /img/antarctic-penguins.jpg
   banner_img_height: 70
-  banner_mask_alpha: 0.56
+  banner_mask_alpha: 0.46
   redirect_delay: 10000
 links:
   enable: false
