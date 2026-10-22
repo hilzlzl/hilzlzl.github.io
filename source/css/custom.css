@@ -1,0 +1,48 @@
+/* 自定义外观集中在这里；无需修改 node_modules 中的主题文件。 */
+html { scroll-behavior: smooth; }
+.navbar { box-shadow: none; padding-top: 1.05rem; padding-bottom: 1.05rem; }
+.navbar-brand strong { font-size: 1.3rem; letter-spacing: .08em; font-weight: 600; }
+.navbar .nav-item { margin-left: .4rem; }
+.navbar .nav-link { font-size: .88rem; letter-spacing: .06em; }
+.navbar.scrolling-navbar.top-nav-collapse { box-shadow: 0 1px 0 rgba(255,255,255,.07); }
+.banner { background-color: #1a2d3e; }
+.banner-text { letter-spacing: .06em; }
+.banner-text .h2 { font-size: clamp(1.6rem, 3vw, 2.5rem); line-height: 1.65; font-weight: 500; text-wrap: balance; }
+.banner-text::before { content: 'HILZL / RESEARCH & ENGINEERING'; display: block; color: #a8bdcd; font-size: .7rem; letter-spacing: .28em; margin-bottom: 1.6rem; }
+.banner-text::after { content: 'AI Agent · 可靠性工程 · 研究实践'; display: block; color: #c0cdd8; font-size: .86rem; font-weight: 400; letter-spacing: .08em; margin-top: 1.25rem; }
+body:not(.home-page) .banner-text::after { display: none; }
+#board { box-shadow: 0 3px 22px rgba(24,42,60,.035); border-radius: 8px; border: 1px solid rgba(115,137,158,.10); padding-top: 2.5rem; }
+.home-page #board { margin-top: -2rem !important; position: relative; }
+.index-card { padding-top: 2rem; padding-bottom: 2.25rem; border-bottom: 1px solid var(--line-color); }
+.index-card:last-child { border-bottom: 0; }
+.index-header { font-size: 1.42rem; line-height: 1.6; font-weight: 600; margin-bottom: .8rem; }
+.index-excerpt { line-height: 1.95; font-size: .94rem; }
+.index-btm { margin-top: 1.1rem; font-size: .78rem; }
+.markdown-body { line-height: 1.95; overflow-wrap: anywhere; }
+.markdown-body h2 { margin-top: 2.3em; padding-bottom: .6em; }
+.markdown-body h3 { margin-top: 1.8em; }
+.markdown-body blockquote { border-left: 3px solid #7899af; background: rgba(123,153,175,.06); padding: .8rem 1.2rem; }
+.markdown-body table { font-size: .87rem; }
+.markdown-body table th { background: rgba(123,153,175,.08); }
+.markdown-body a { text-underline-offset: 4px; }
+.post-metas { letter-spacing: .01em; }
+.project-label { color: #7891a6; font-size: .73rem; font-weight: 600; letter-spacing: .15em; }
+.project-links { display: flex; flex-wrap: wrap; gap: .65rem; margin: 1.5rem 0 2rem; }
+.project-links a { display: inline-block; padding: .45rem 1rem; border: 1px solid var(--line-color); border-radius: 4px; font-size: .85rem; text-decoration: none; }
+.project-links a:hover { background: rgba(123,153,175,.09); }
+footer { font-size: .76rem; line-height: 1.9; color: var(--sec-text-color); padding: 2.6rem 0; }
+.scroll-down-bar { opacity: .55; }
+@media (max-width: 767px) {
+  .navbar .nav-item { margin-left: 0; }
+  .banner-text { padding: 0 1.3rem; }
+  .banner-text::before { font-size: .58rem; letter-spacing: .17em; margin-bottom: 1.2rem; }
+  .banner-text::after { font-size: .73rem; }
+  .index-header { font-size: 1.22rem; }
+  #board { padding-top: 1.1rem; }
+  .home-page #board { margin-top: -1rem !important; }
+  .index-card { padding-top: 1.3rem; padding-bottom: 1.6rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}

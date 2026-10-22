@@ -1,0 +1,146 @@
+# 只覆盖需要定制的选项，其余继承 Fluid 1.9.8 默认值。
+favicon: /img/favicon.svg
+apple_touch_icon: /img/favicon.svg
+force_https: false
+dark_mode:
+  enable: true
+  default: light
+font:
+  font_size: 16px
+  font_family: '-apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif'
+  letter_spacing: 0.015em
+custom_css: /css/custom.css
+custom_js: /js/custom.js
+color:
+  body_bg_color: '#f5f6f8'
+  body_bg_color_dark: '#151b24'
+  navbar_bg_color: '#152333'
+  navbar_bg_color_dark: '#111c29'
+  text_color: '#263445'
+  sec_text_color: '#6a7686'
+  board_color: '#ffffff'
+  board_color_dark: '#1d2733'
+  post_text_color: '#334155'
+  post_heading_color: '#182a3c'
+  post_link_color: '#376883'
+  link_hover_color: '#376883'
+  link_hover_color_dark: '#8bbbd4'
+  line_color: '#e8edf1'
+fun_features:
+  typing:
+    enable: false
+  progressbar:
+    enable: false
+  anchorjs:
+    enable: true
+navbar:
+  blog_title: hilzl
+  menu:
+    - { key: home, name: 首页, link: / }
+    - { key: projects, name: 项目, link: /projects/ }
+    - { key: archive, name: 归档, link: /archives/ }
+    - { key: category, name: 分类, link: /categories/ }
+    - { key: tag, name: 标签, link: /tags/ }
+    - { key: about, name: 关于, link: /about/ }
+
+# 换背景：图片放到 source/img/，修改以下 banner_img；也可以直接替换 background.svg。
+index:
+  banner_img: /img/background.svg
+  banner_img_height: 64
+  banner_mask_alpha: 0
+  slogan:
+    enable: true
+    text: 让研究可复现，让系统更可靠。
+  auto_excerpt:
+    enable: true
+    length: 160
+  post_meta:
+    date: true
+    category: true
+    tag: true
+  post_url_target: _self
+post:
+  banner_img: /img/background.svg
+  banner_img_height: 48
+  banner_mask_alpha: 0
+  meta:
+    date:
+      format: YYYY-MM-DD
+    wordcount:
+      enable: true
+    min2read:
+      enable: true
+    views:
+      enable: false
+  toc:
+    enable: true
+    collapseDepth: 2
+  comments:
+    enable: false
+  image_zoom:
+    enable: false
+  copyright:
+    enable: true
+archive:
+  banner_img: /img/background.svg
+  banner_img_height: 42
+  banner_mask_alpha: 0
+category:
+  banner_img: /img/background.svg
+  banner_img_height: 42
+  banner_mask_alpha: 0
+tag:
+  banner_img: /img/background.svg
+  banner_img_height: 42
+  banner_mask_alpha: 0
+  tagcloud:
+    min_font: 16
+    max_font: 24
+    start_color: '#60758a'
+    end_color: '#274d69'
+about:
+  banner_img: /img/background.svg
+  banner_img_height: 42
+  banner_mask_alpha: 0
+  avatar: /img/avatar.svg
+  name: hilzl
+  intro: 研究与工程 · 记录问题、实现与验证。
+  icons:
+    - { class: 'iconfont icon-github-fill', link: 'https://github.com/hilzlzl', tip: GitHub }
+page:
+  banner_img: /img/background.svg
+  banner_img_height: 42
+  banner_mask_alpha: 0
+page404:
+  banner_img: /img/background.svg
+  banner_img_height: 70
+  banner_mask_alpha: 0
+  redirect_delay: 10000
+links:
+  enable: false
+search:
+  enable: true
+  path: /local-search.xml
+  generate_path: /local-search.xml
+  field: post
+  content: true
+web_analytics:
+  enable: false
+canonical:
+  enable: true
+footer:
+  content: '© 2026 hilzl · 研究与工程<br><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> · <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="noopener">Fluid</a>'
+  statistics:
+    enable: false
+lazyload:
+  enable: false
+# 基础依赖随站点发布，减少第三方 CDN 对样式和交互的影响。
+iconfont: /vendor/icons/social.css
+static_prefix:
+  jquery: /vendor/jquery/
+  bootstrap: /vendor/bootstrap/
+  anchor: /vendor/anchor/
+  tocbot: /vendor/tocbot/
+  clipboard: /vendor/clipboard/
+  hint: /vendor/hint/
+  github_markdown: /vendor/markdown/

@@ -1,0 +1,27 @@
+{
+  "name": "hilzl-blog",
+  "version": "1.0.0",
+  "private": true,
+  "description": "hilzl 的个人技术博客 · Hexo + Fluid",
+  "scripts": {
+    "clean": "hexo clean",
+    "build": "hexo clean && hexo generate",
+    "start": "hexo server --ip 0.0.0.0",
+    "new": "hexo new",
+    "check": "node tools/check-site.mjs"
+  },
+  "hexo": { "version": "7.3.0" },
+  "engines": { "node": ">=22" },
+  "dependencies": {
+    "hexo": "7.3.0",
+    "hexo-generator-archive": "2.0.0",
+    "hexo-generator-category": "2.0.0",
+    "hexo-generator-index": "4.0.0",
+    "hexo-generator-tag": "2.0.0",
+    "hexo-renderer-ejs": "2.0.0",
+    "hexo-renderer-marked": "7.0.1",
+    "hexo-renderer-stylus": "3.0.1",
+    "hexo-server": "3.0.0",
+    "hexo-theme-fluid": "1.9.8"
+  }
+}
