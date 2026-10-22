@@ -14,10 +14,10 @@ custom_js: /js/custom.js
 color:
   body_bg_color: '#f0f5f7'
   body_bg_color_dark: '#18212a'
-  navbar_bg_color: '#caddf6'
-  navbar_bg_color_dark: '#162741'
-  navbar_text_color: '#284367'
-  navbar_text_color_dark: '#d9e3eb'
+  navbar_bg_color: '#16699A'
+  navbar_bg_color_dark: '#16699A'
+  navbar_text_color: '#ffffff'
+  navbar_text_color_dark: '#ffffff'
   subtitle_color: '#ffffff'
   subtitle_color_dark: '#ffffff'
   text_color: '#263746'
@@ -61,7 +61,7 @@ index:
   banner_mask_alpha: 0.22
   slogan:
     enable: true
-    text: 让研究可复现，让系统更可靠。
+    text: hi2026
   auto_excerpt:
     enable: true
     length: 160
@@ -115,7 +115,7 @@ about:
   banner_mask_alpha: 0.22
   avatar: /img/avatar.svg
   name: hilzl
-  intro: 研究与工程 · 记录问题、实现与验证。
+  intro: ''
   icons:
     - { class: 'iconfont icon-github-fill', link: 'https://github.com/hilzlzl', tip: GitHub }
 page:
@@ -140,7 +140,7 @@ web_analytics:
 canonical:
   enable: true
 footer:
-  content: '© 2026 hilzl · 研究与工程<br><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> · <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="noopener">Fluid</a>'
+  content: '© 2026 hilzl · 项目与随笔<br><a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> · <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="noopener">Fluid</a>'
   statistics:
     enable: false
 lazyload:
