@@ -47,7 +47,7 @@ powershell -ExecutionPolicy Bypass -File .\tools\publish.ps1
 
 也可以手动发布：提交并推送 `source` 分支，在仓库 `Settings → Pages → Build and deployment → Source` 选择 **GitHub Actions**，然后到 `Actions → Build and deploy blog → Run workflow`，选择 `source` 运行。建议把仓库默认分支改为 `source`，避免以后在旧网页分支里误修改。
 
-如果 GitHub 的 `github-pages` 环境限制了部署分支，在 `Settings → Environments → github-pages` 中允许 `source`。部署成功前，旧站仍是线上版本；以 Actions 成功状态和实际网页为准。
+发布脚本会为原有 `github-pages` 环境新增 `source` 部署权限。手动发布时，如果环境限制了部署分支，在 `Settings → Environments → github-pages` 中允许 `source`。部署成功前，旧站仍是线上版本；以 Actions 成功状态和实际网页为准。
 
 ## 后续更新
 

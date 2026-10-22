@@ -15,6 +15,16 @@ Run-Native npm.cmd @('run', 'check')
 Run-Native gh @('auth', 'setup-git', '--hostname', 'github.com')
 Run-Native git @('fetch', 'origin', 'gh-pages')
 Run-Native git @('push', 'origin', 'refs/remotes/origin/gh-pages:refs/heads/backup/site-before-20261022')
+$environment = 'repos/hilzlzl/hilzlzl.github.io/environments/github-pages'
+$policy = gh api $environment --jq '.deployment_branch_policy.custom_branch_policies'
+if ($LASTEXITCODE -ne 0) { throw 'Could not read the Pages environment.' }
+if ($policy -eq 'true') {
+  $branches = gh api "$environment/deployment-branch-policies" --jq '.branch_policies[].name'
+  if ($LASTEXITCODE -ne 0) { throw 'Could not read deployment branch policies.' }
+  if (@($branches) -notcontains 'source') {
+    Run-Native gh @('api', '--method', 'POST', "$environment/deployment-branch-policies", '-f', 'name=source', '-f', 'type=branch', '--silent')
+  }
+}
 Run-Native git @('push', '-u', 'origin', 'source')
 Run-Native gh @('api', '--method', 'PATCH', 'repos/hilzlzl/hilzlzl.github.io', '-f', 'default_branch=source', '--silent')
 Run-Native gh @('api', '--method', 'PUT', 'repos/hilzlzl/hilzlzl.github.io/pages', '-f', 'build_type=workflow', '--silent')

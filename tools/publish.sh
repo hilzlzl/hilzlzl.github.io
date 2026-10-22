@@ -12,6 +12,13 @@ npm run check
 gh auth setup-git --hostname github.com
 git fetch origin gh-pages
 git push origin refs/remotes/origin/gh-pages:refs/heads/backup/site-before-20261022
+# 旧站可能只允许 gh-pages 部署；只新增 source，不移除原来的限制。
+environment="repos/$repo/environments/github-pages"
+if test "$(gh api "$environment" --jq '.deployment_branch_policy.custom_branch_policies')" = true; then
+  if test -z "$(gh api "$environment/deployment-branch-policies" --jq '.branch_policies[] | select(.name == "source") | .id')"; then
+    gh api --method POST "$environment/deployment-branch-policies" -f name=source -f type=branch --silent
+  fi
+fi
 git push -u origin source
 gh api --method PATCH "repos/$repo" -f default_branch=source --silent
 gh api --method PUT "repos/$repo/pages" -f build_type=workflow --silent
