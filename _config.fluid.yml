@@ -12,11 +12,11 @@ font:
 custom_css: /css/custom.css
 custom_js: /js/custom.js
 color:
-  body_bg_color: '#e8edf1'
+  body_bg_color: '#f0f5f7'
   body_bg_color_dark: '#18212a'
-  navbar_bg_color: '#17364c'
+  navbar_bg_color: '#dce8ee'
   navbar_bg_color_dark: '#17364c'
-  navbar_text_color: '#f5f8fa'
+  navbar_text_color: '#2c4859'
   navbar_text_color_dark: '#d9e3eb'
   subtitle_color: '#ffffff'
   subtitle_color_dark: '#ffffff'
@@ -24,7 +24,7 @@ color:
   text_color_dark: '#d9e3eb'
   sec_text_color: '#637687'
   sec_text_color_dark: '#a7bac9'
-  board_color: '#fafbfc'
+  board_color: '#ffffff'
   board_color_dark: '#222e39'
   post_text_color: '#354959'
   post_text_color_dark: '#d9e3eb'
@@ -58,7 +58,7 @@ navbar:
 index:
   banner_img: /img/antarctic-penguins.jpg
   banner_img_height: 64
-  banner_mask_alpha: 0.46
+  banner_mask_alpha: 0.22
   slogan:
     enable: true
     text: 让研究可复现，让系统更可靠。
@@ -73,7 +73,7 @@ index:
 post:
   banner_img: /img/antarctic-penguins.jpg
   banner_img_height: 48
-  banner_mask_alpha: 0.46
+  banner_mask_alpha: 0.22
   meta:
     date:
       format: YYYY-MM-DD
@@ -95,15 +95,15 @@ post:
 archive:
   banner_img: /img/antarctic-penguins.jpg
   banner_img_height: 42
-  banner_mask_alpha: 0.46
+  banner_mask_alpha: 0.22
 category:
   banner_img: /img/antarctic-penguins.jpg
   banner_img_height: 42
-  banner_mask_alpha: 0.46
+  banner_mask_alpha: 0.22
 tag:
   banner_img: /img/antarctic-penguins.jpg
   banner_img_height: 42
-  banner_mask_alpha: 0.46
+  banner_mask_alpha: 0.22
   tagcloud:
     min_font: 16
     max_font: 24
@@ -112,7 +112,7 @@ tag:
 about:
   banner_img: /img/antarctic-penguins.jpg
   banner_img_height: 42
-  banner_mask_alpha: 0.46
+  banner_mask_alpha: 0.22
   avatar: /img/avatar.svg
   name: hilzl
   intro: 研究与工程 · 记录问题、实现与验证。
@@ -121,11 +121,11 @@ about:
 page:
   banner_img: /img/antarctic-penguins.jpg
   banner_img_height: 42
-  banner_mask_alpha: 0.46
+  banner_mask_alpha: 0.22
 page404:
   banner_img: /img/antarctic-penguins.jpg
   banner_img_height: 70
-  banner_mask_alpha: 0.46
+  banner_mask_alpha: 0.22
   redirect_delay: 10000
 links:
   enable: false
