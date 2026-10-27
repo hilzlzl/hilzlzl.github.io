@@ -1,7 +1,7 @@
 ---
 title: Reliable Deep Research：让研究任务可恢复，让报告有据可查
 date: 2026-10-22 10:00:00
-updated: 2026-10-22 10:00:00
+updated: 2026-10-27 10:00:00
 categories:
   - 项目实践
 tags:
@@ -15,7 +15,7 @@ excerpt: 基于 Open Deep Research，增加持久化任务运行时、问题覆�
 
 Reliable Deep Research 尝试把这些问题变成可记录、可检查的工程过程。
 
-<div class="project-links"><a href="/projects/">项目概览 →</a><a href="/downloads/reliable-deep-research.zip">下载源码 ZIP ↓</a><a href="/2026/10/22/reliable-deep-research-recovery/">阅读任务恢复设计 →</a></div>
+<div class="project-links"><a href="https://github.com/hilzlzl/reliable-deep-research" target="_blank" rel="noopener noreferrer">GitHub 源码 ↗</a><a href="/projects/#reliable-deep-research">项目概览 →</a><a href="/2026/10/22/reliable-deep-research-recovery/">任务恢复设计 →</a></div>
 
 ## 从上游到这个项目
 
@@ -38,7 +38,9 @@ Reliable Deep Research 尝试把这些问题变成可记录、可检查的工程
 
 ## 本次开发评测结果
 
-评测包含 30 道问题，每题独立运行 2 次，共 60 个评估槽位，使用 24 份固定参考来源。Repository Baseline 沿用上游研究流程，并保留仓库中的检索、模型接入和预算等实验适配；Claim-first 是早期对照方案。
+评测包含 30 道问题，每题 2 个评估槽位，共 60 个槽位，使用 24 份固定参考来源。Repository Baseline 沿用上游研究流程，并保留仓库中的检索、模型接入和预算等实验适配；Claim-first 是早期对照方案。
+
+**Reliable Deep Research 一列为替换后开发汇总：原 47 次通过记录，加上全部 13 次重跑记录，其中仍有 1 次失败。** 60 个槽位实际经历了 73 次生成，并非在发布配置下全新运行的 60 次验收。全部原未通过槽位均被替换，未按最佳分数挑选；平均耗时与调用只计算保留的 60 个槽位，不含被替换的 13 次原始尝试开销。
 
 | 指标 | Repository Baseline | Claim-first（早期方案） | Reliable Deep Research |
 | --- | ---: | ---: | ---: |
@@ -54,13 +56,15 @@ Reliable Deep Research 尝试把这些问题变成可记录、可检查的工程
 
 **结果的边界：** 参考要点由助手编写，生成和评审使用同一网关模型别名，尚无独立人工验证。表格展示开发后的实际交付结果，样本选择与配置变化限制了因果解释，不能据此直接推出对任意问题的普遍提升。
 
-完整协议见源码中的 `docs/evaluation.zh-CN.md`；全部 180 条评估样本位于 `benchmarks/results/release_comparison.json`。
+完整协议见[实验评测文档](https://github.com/hilzlzl/reliable-deep-research/blob/main/docs/evaluation.zh-CN.md)；全部 180 条评估样本见[公开对照记录](https://github.com/hilzlzl/reliable-deep-research/blob/main/benchmarks/results/release_comparison.json)。
 
 ## 无需密钥的本地演示
 
-先[下载源码](/downloads/reliable-deep-research.zip)并解压，安装 [uv](https://docs.astral.sh/uv/getting-started/installation/)，在项目根目录运行。命令适用于 PowerShell 和 Bash：
+先从 [GitHub 仓库](https://github.com/hilzlzl/reliable-deep-research)克隆当前源码，安装 [uv](https://docs.astral.sh/uv/getting-started/installation/)，在项目根目录运行。命令适用于 PowerShell 和 Bash：
 
 ```bash
+git clone https://github.com/hilzlzl/reliable-deep-research.git
+cd reliable-deep-research
 uv sync --frozen --python 3.11 --extra dev
 uv run --frozen python -m experiments.reliability.reliability_demo
 uv run --frozen --extra dev python -m pytest -q
@@ -80,7 +84,7 @@ uv run --frozen python -m experiments.runners.run_research --question "What are 
 
 真实研究会产生模型与检索费用。默认上限为 40 次模型调用、4 次检索、6 次任务尝试和 1,200 秒；每道题使用独立数据库，输出报告、验收摘要和事件轨迹。退出码非零表示该次运行未通过。
 
-自定义 API、本地检索与产物说明见源码内的 `docs/running.zh-CN.md`。
+自定义 API、本地检索与产物说明见[运行指南](https://github.com/hilzlzl/reliable-deep-research/blob/main/docs/running.zh-CN.md)。旧的[博客源码快照 ZIP](/downloads/reliable-deep-research.zip)继续保留，对应提交 `a4e9b4c`；最新代码请以 GitHub 为准。
 
 ## 阅读代码的入口
 

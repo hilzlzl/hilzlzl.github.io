@@ -38,7 +38,7 @@ Reliable Deep Research 把恢复边界落在研究任务上：已经提交的结
 
 这些是独立的合成故障实验。它们验证了指定条件下的恢复行为，不等同于证明任意线上故障下都能恢复。
 
-完整协议与结果入口见[源码 ZIP](/downloads/reliable-deep-research.zip)中的 `docs/recovery.zh-CN.md`。
+完整协议与结果入口见 GitHub 上的[恢复实验文档](https://github.com/hilzlzl/reliable-deep-research/blob/main/docs/evaluation.zh-CN.md#任务恢复实验)。
 
 ## 恢复边界
 

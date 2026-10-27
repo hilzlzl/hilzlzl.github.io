@@ -37,9 +37,17 @@ for (const path of files.filter(p => /\.(html|css)$/.test(p))) {
   }
 }
 assert.equal(missing.length, 0, `站内链接或资源不存在:\n${missing.join('\n')}`);
-for (const path of ['index.html', 'projects/index.html', 'about/index.html', 'archives/index.html', 'categories/index.html', 'tags/index.html', 'local-search.xml', '.nojekyll', 'downloads/reliable-deep-research.zip']) {
+for (const path of ['index.html', 'projects/index.html', '2026/10/27/courseagent/index.html', 'about/index.html', 'archives/index.html', 'categories/index.html', 'tags/index.html', 'local-search.xml', '.nojekyll', 'downloads/reliable-deep-research.zip']) {
   await stat(join(root, path));
 }
 const index = await readFile(join(root, 'local-search.xml'), 'utf8');
 assert(index.includes('Reliable Deep Research'), '缺少项目文章的搜索索引');
+assert(index.includes('CourseAgent'), '缺少 CourseAgent 文章的搜索索引');
+for (const path of ['index.html', 'projects/index.html']) {
+  const html = await readFile(join(root, path), 'utf8');
+  for (const repo of ['reliable-deep-research', 'CourseAgent']) {
+    assert(html.includes(`href="https://github.com/hilzlzl/${repo}"`), `${path} 缺少 ${repo} 源码入口`);
+  }
+  assert.equal((html.match(/class="project-card project-card--/g) || []).length, 2, `${path} 应展示两个项目`);
+}
 console.log(`检查通过：${files.filter(p => p.endsWith('.html')).length} 个页面，${checked} 条本地资源/链接，搜索索引与源码下载完整。`);
