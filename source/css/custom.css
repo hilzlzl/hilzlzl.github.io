@@ -101,6 +101,17 @@ html { scroll-behavior: smooth; }
 .project-diagram figcaption { font-size: .82rem; color: var(--project-muted); margin-bottom: 1rem; }
 .project-diagram pre { background: transparent; color: var(--text-color); padding: 0; margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-size: .8rem; }
 .project-diagram svg { display: block; max-width: 100%; height: auto; margin: auto; }
+.markdown-body .content-diagram { margin: 1.5rem 0; padding: .8rem; border: 1px solid var(--line-color); border-radius: 4px; }
+.content-diagram pre, .content-diagram code.mermaid, .diagram-dialog .mermaid { display: block; margin: 0; padding: 0; background: transparent; color: var(--text-color); white-space: pre-wrap; overflow-wrap: anywhere; }
+.content-diagram svg { display: block; max-width: 100%; height: auto; margin: .5rem auto; }
+.diagram-expand, .diagram-dialog button { display: block; margin: 0 0 .6rem auto; padding: .3rem .6rem; border: 1px solid var(--line-color); border-radius: 3px; background: var(--board-bg-color); color: var(--project-accent); font: inherit; font-size: .8rem; cursor: pointer; }
+.diagram-expand:focus-visible, .diagram-dialog button:focus-visible { outline: 2px solid var(--project-accent); outline-offset: 3px; }
+.diagram-dialog { width: calc(100vw - 2rem); height: calc(100dvh - 2rem); max-width: none; max-height: none; padding: 1rem; border: 1px solid var(--line-color); background: var(--board-bg-color); color: var(--text-color); border-radius: 5px; }
+.diagram-dialog::backdrop { background: rgba(0, 0, 0, .6); }
+.diagram-dialog-toolbar { display: flex; gap: .7rem; justify-content: flex-end; }
+.diagram-dialog-toolbar button { margin-left: 0; }
+.diagram-dialog-viewport { overflow: auto; height: calc(100% - 2.8rem); }
+.diagram-dialog svg { display: block; width: var(--viewer-width, var(--diagram-width)); max-width: none !important; height: auto; margin: auto; }
 .project-features { border-top: 1px solid var(--line-color); padding: 1.4rem 0 .4rem; }
 .project-features > div { margin-bottom: 1.1rem; }
 .project-features h3, .project-card-body .project-results-title { font-size: .95rem; font-weight: 600; }

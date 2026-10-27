@@ -50,4 +50,9 @@ for (const path of ['index.html', 'projects/index.html']) {
   }
   assert.equal((html.match(/class="project-card project-card--/g) || []).length, 2, `${path} 应展示两个项目`);
 }
+for (const path of ['2026/10/27/courseagent/index.html', '2026/10/22/reliable-deep-research/index.html']) {
+  const html = await readFile(join(root, path), 'utf8');
+  assert.equal((html.match(/<figure class="content-diagram">/g) || []).length, 2, `${path} 应包含流程图和架构图`);
+  assert.equal((html.match(/src="\/js\/project-diagrams.js"/g) || []).length, 1, `${path} 图表脚本缺失或重复`);
+}
 console.log(`检查通过：${files.filter(p => p.endsWith('.html')).length} 个页面，${checked} 条本地资源/链接，搜索索引与源码下载完整。`);

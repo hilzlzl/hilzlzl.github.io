@@ -28,6 +28,22 @@ excerpt: 根据课程要求搜题、核对答案，在 Linux 沙箱执行参考�
 
 ## 处理流程
 
+```mermaid
+flowchart LR
+    Q[教师需求与课程资料] --> T[持久化任务与 LangGraph 调度]
+    T --> O[普通题检索与答案核验]
+    T --> C[编程题来源与沙箱核验]
+    O --> V[题量、范围与验证检查]
+    C --> V
+    V --> A[Excel / JSON / 教师评测包]
+    V -->|默认平台交付| P[头歌未发布试卷与回读核对]
+    V -. 预算内修复与补搜 .-> T
+    T --> S[(SQLite 任务与检查点)]
+    S -. 从已保存进度恢复 .-> T
+```
+
+图源：[CourseAgent README](https://github.com/hilzlzl/CourseAgent/blob/main/README.md)。
+
 普通题与编程题并行搜集，随后按课程范围和选题历史筛选。普通题核对答案，编程题核对公开样例，并在 Linux 沙箱内执行参考程序、生成评测数据。题量或验证结果未满足要求时，在剩余预算内补搜和修复。
 
 检查完成后导出文件，按所选模式决定是否保存到平台。各模块的职责见[系统架构](https://github.com/hilzlzl/CourseAgent/blob/main/docs/architecture.md)。
@@ -37,6 +53,61 @@ excerpt: 根据课程要求搜题、核对答案，在 Linux 沙箱执行参考�
 任务队列与 LangGraph 检查点保存在 SQLite 中，通过心跳租约管理执行中的任务。逐题缓存保存已通过的验证结果；题目内容变化后，对应凭据失效，需要重新验证。
 
 失败阶段和已保留的结果可以在页面查看。修正配置后，可在原任务上继续执行。
+
+## 系统架构
+
+API 和 Worker 是独立进程，任务队列与图检查点分别存储。编程参考程序在 Linux 沙箱运行，平台导入由 Node.js / Playwright 适配器执行。
+
+```mermaid
+flowchart TB
+    UI[浏览器界面]
+    subgraph Local[本地服务 · run_service 进程管理]
+        API["API 进程 · FastAPI<br/>提交 / 查询 / SSE 事件"]
+        Queue[("SQLite<br/>任务队列 / 租约 / 事件")]
+        subgraph Worker[Worker 进程]
+            Jobs[任务执行器 · agent_jobs]
+            Graph["LangGraph 编排<br/>规划 / 检查 / 决策 / 修复"]
+            Ordinary["普通题分支<br/>检索 / 选题 / 答案核验"]
+            Coding["编程题分支<br/>来源筛选 / 输入输出适配 / 执行核验"]
+            Retrieval["检索与选题策略<br/>BM25 / 可选向量 / 课程范围 / 选题历史"]
+            Model["模型访问层<br/>角色路由 / 共享预算 / 并发控制"]
+            Export[交付检查与文件导出]
+            Delivery[平台交付调度 · import_jobs]
+        end
+        Checkpoints[(SQLite · 图检查点)]
+        Files[("文件存储<br/>逐题缓存 / 题目结果 / 导出文件 / 交付记录")]
+        Index[(SQLite · 候选索引)]
+        Sandbox["隔离执行环境<br/>bubblewrap / 资源限制"]
+        Adapter["Node.js / Playwright 进程<br/>导入 / 用例配置 / 保存 / 回读"]
+    end
+    Sources[外部题源与搜索服务]
+    LLM[配置的模型服务]
+    Platform[头歌平台 · 未发布试卷]
+    UI -->|HTTP| API
+    API -->|持久化入队| Queue
+    Queue -->|认领与续租| Jobs
+    Queue -. 事件回放 .-> API
+    API -. SSE .-> UI
+    Jobs --> Graph
+    Graph --> Ordinary & Coding
+    Ordinary & Coding --> Retrieval
+    Retrieval <--> Index
+    Retrieval --> Sources
+    Graph --> Model
+    Ordinary & Coding --> Model
+    Model --> LLM
+    Coding --> Sandbox
+    Graph <--> Checkpoints
+    Ordinary & Coding <--> Files
+    Graph --> Export
+    Export --> Files
+    Export -->|默认平台交付| Delivery
+    Delivery --> Adapter
+    Adapter --> Platform
+    Adapter --> Files
+```
+
+图源：[CourseAgent 系统架构](https://github.com/hilzlzl/CourseAgent/blob/main/docs/architecture.md)。
 
 ## 实验记录
 

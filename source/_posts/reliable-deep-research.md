@@ -28,11 +28,87 @@ Reliable Deep Research 基于 LangChain Open Deep Research，主要增加了任�
 
 ## 报告生成流程
 
+```mermaid
+flowchart LR
+    Q[研究问题] --> T[研究任务 DAG]
+    T --> S[(SQLite 任务结果与证据)]
+    Q --> C[固定问题要点]
+    S --> P[证据约束草稿]
+    C --> P
+    P --> R[段落语义与问题覆盖审核]
+    R --> A[报告与引用渲染]
+    R -. 有界补搜与修复 .-> T
+    S -. 复用已提交任务 .-> T
+```
+
+图源：[reliable-deep-research README](https://github.com/hilzlzl/reliable-deep-research/blob/main/README.zh-CN.md)。
+
 研究问题首先转成任务 DAG。检索任务产生证据，任务结果与证据进入 SQLite；报告生成环节根据固定的问题要点和这些证据编写草稿。
 
 随后，审核环节检查段落语义支持与问题覆盖。若有缺口，系统可以在剩余预算内安排定向补搜和修复；最后由 Evidence ID 确定性渲染引用。
 
 引用可以追溯到存储的证据片段，但段落是否得到证据支持，仍由模型判断，可能出错。
+
+## 系统架构
+
+调度、检索、报告和模型调用都在同一 Python 进程内。SQLite 保存任务结果与证据，本地文件保存报告、摘要和事件日志。
+
+```mermaid
+flowchart TB
+    Input[研究问题 / JSONL 问题文件]
+    subgraph Local[本地 Python 进程]
+        Runner[命令行入口 · run_research]
+        Graph["LangGraph 编排<br/>研究摘要 / 问题拆解 / Supervisor"]
+        subgraph Research[研究任务]
+            Scheduler["DAG 调度器<br/>依赖 / 并发 / 重试 / 超时"]
+            Researchers["Researcher<br/>检索 / 阅读 / 压缩"]
+            Retrieval["检索工具<br/>Tavily / 本地 BM25 / 可选向量融合"]
+        end
+        subgraph Reporting[报告流水线]
+            Draft["问题覆盖计划与草稿<br/>按 Evidence ID 组织引用"]
+            Audit[段落支持与回答完整性审核]
+            Repair[局部修复与缺口补搜]
+            Render[引用渲染与验收检查]
+        end
+        Models[模型调用 · 结构化输出]
+        Budget["共享预算<br/>调用 / 检索 / token / 时间"]
+    end
+    Store[("SQLite · runtime.db<br/>任务 / 结果 / Document / Evidence")]
+    Files[("本地文件<br/>报告 / 摘要 / 事件 / 输入快照")]
+    Web[网络搜索与来源页面]
+    Corpus[本地语料与嵌入缓存]
+    LLM[配置的模型服务]
+    Input --> Runner
+    Runner --> Graph
+    Runner --> Budget
+    Graph --> Scheduler
+    Scheduler --> Researchers
+    Researchers --> Retrieval
+    Retrieval --> Web
+    Retrieval --> Corpus
+    Scheduler <--> Store
+    Researchers --> Store
+    Graph --> Draft
+    Store --> Draft
+    Draft --> Audit
+    Audit -->|需要修复| Repair
+    Repair -->|重新审核| Audit
+    Repair -. 定向研究任务 .-> Scheduler
+    Audit --> Render
+    Render --> Files
+    Runner --> Files
+    Graph --> Models
+    Researchers --> Models
+    Draft --> Models
+    Audit --> Models
+    Repair --> Models
+    Models --> LLM
+    Budget -. 额度约束 .-> Scheduler
+    Budget -. 额度约束 .-> Retrieval
+    Budget -. 额度约束 .-> Models
+```
+
+图源：[reliable-deep-research 系统架构](https://github.com/hilzlzl/reliable-deep-research/blob/main/docs/project_overview.zh-CN.md)。
 
 ## 开发评测
 

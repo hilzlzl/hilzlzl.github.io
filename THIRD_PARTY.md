@@ -19,6 +19,6 @@ Browser assets are stored locally to make rendering independent of third-party C
 
 JavaScript/CSS files were retrieved from the versioned npm packages via unpkg. Icon CSS/font files were retrieved from the exact iconfont URLs referenced by Fluid 1.9.8; only URL paths were rewritten to local equivalents.
 
-Mermaid Tiny was retrieved from the versioned `@mermaid-js/tiny` npm tarball. Its standalone bundle and license are stored in `source/vendor/mermaid/`; it loads only on the projects page.
+Mermaid Tiny was retrieved from the versioned `@mermaid-js/tiny` npm tarball. Its standalone bundle and license are stored in `source/vendor/mermaid/`; it loads on the projects page and articles containing Mermaid diagrams.
 
 The downloadable Reliable Deep Research source snapshot retains its own MIT license and upstream attribution in the ZIP.
