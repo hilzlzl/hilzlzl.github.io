@@ -10,12 +10,12 @@ hexo.extend.filter.register('before_generate', () => {
   const showcase = `<% if (page.current === 1) { %>
     <section class="home-projects" aria-labelledby="featured-projects-title">
       <div class="section-heading">
-        <div><p class="project-label">SELECTED PROJECTS</p><h2 id="featured-projects-title">把想法做成可以运行的项目</h2></div>
+        <h2 id="featured-projects-title">项目</h2>
         <a class="section-more" href="<%= url_for('/projects/') %>">全部项目 <span aria-hidden="true">↗</span></a>
       </div>
       <%- partial('_partials/project-showcase', { compact: true }) %>
     </section>
   <% } %>
-  <div class="section-heading writing-heading"><div><p class="project-label">FIELD NOTES</p><h2>项目与随笔</h2></div><a class="section-more" href="<%= url_for('/archives/') %>">文章归档 <span aria-hidden="true">↗</span></a></div>`;
+  <div class="section-heading writing-heading"><h2>文章</h2><a class="section-more" href="<%= url_for('/archives/') %>">归档 <span aria-hidden="true">↗</span></a></div>`;
   hexo.theme.setView('index.ejs', index.replace('<% page.posts.each', `${showcase}\n<% page.posts.each`));
 });

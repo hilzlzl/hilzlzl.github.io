@@ -1,24 +1,25 @@
 - id: reliable-deep-research
-  number: '01'
   name: Reliable Deep Research
-  category: 研究与证据
-  title: 让长研究可恢复，让报告有据可查。
-  description: 面向长时间运行的深度研究，保存已完成任务，审核问题覆盖与引用证据，并在有限预算内修复报告缺口。
+  category: 深度研究
+  description: 基于 Open Deep Research，增加任务结果持久化、失败重试和报告审核。研究中断后复用已提交的任务结果，生成报告时检查问题覆盖和引用支持。
   repo: https://github.com/hilzlzl/reliable-deep-research
   article: /2026/10/22/reliable-deep-research/
   docs: https://github.com/hilzlzl/reliable-deep-research/blob/main/docs/project_overview.zh-CN.md
   evaluation: https://github.com/hilzlzl/reliable-deep-research/blob/main/docs/evaluation.zh-CN.md
   stack: [Python, LangGraph, SQLite, asyncio]
-  input: 一个研究问题
-  stages: [任务拆解, 证据检索, 覆盖审核]
-  output: 带可追溯引用的报告
-  persistence: 保存任务与证据 · 中断后复用
+  diagram: |
+    flowchart TD
+      A[研究问题] --> B[任务拆分与检索]
+      B --> C[报告生成与审核]
+      C --> D[报告与引用]
+      B <--> E[(SQLite 任务与证据)]
+      C -. 补搜与修复 .-> B
   features:
-    - title: 已完成的工作，不必重做
+    - title: 任务恢复
       text: 以研究任务为恢复边界，持久化已提交结果，重试失败任务并清理过期证据。
-    - title: 引用之外，还要检查支持关系
+    - title: 报告审核
       text: 先固定问题要点，再审核段落证据与问题覆盖，由 Evidence ID 渲染引用。
-    - title: 修复有反馈，执行有预算
+    - title: 预算限制
       text: 最多两轮报告修复、两个定向补搜任务，并发研究共享调用与时间预算。
   metrics:
     - value: 59/60
@@ -29,26 +30,26 @@
       label: 提交后重启复用实验
   note: 报告指标为两次覆盖版本实验的替换后开发汇总，60 个槽位经历 73 次生成；重启复用为独立合成实验。统计口径与局限见评测文档。
 - id: courseagent
-  number: '02'
   name: CourseAgent
-  category: 教学与交付
-  title: 从课程需求，到可核验的作业。
-  description: 结合教师需求与课程资料，并行搜集普通题和编程题，核验答案与参考程序，导出文件或交付至头歌未发布试卷。
+  category: 课程作业
+  description: 根据教师需求和课程资料搜集普通题、编程题，核对答案并执行参考程序。结果可导出为本地文件，也可保存至头歌未发布试卷。
   repo: https://github.com/hilzlzl/CourseAgent
   article: /2026/10/27/courseagent/
   docs: https://github.com/hilzlzl/CourseAgent/blob/main/docs/quickstart.md
   evaluation: https://github.com/hilzlzl/CourseAgent/blob/main/docs/evaluation.md
   stack: [Python, LangGraph, SQLite, bubblewrap]
-  input: 教师需求与课程资料
-  stages: [并行搜题, 答案核验, 交付检查]
-  output: 作业文件 / 未发布试卷
-  persistence: 保存任务与检查点 · 复用验证缓存
+  diagram: |
+    flowchart TD
+      A[教师需求与课程资料] --> B[搜题与筛选]
+      B --> C[答案与参考程序核验]
+      C --> D[Excel / JSON / 教师评测包]
+      C --> E[头歌未发布试卷]
   features:
-    - title: 让题目贴合课程范围
+    - title: 搜题与筛选
       text: 普通题与编程题并行搜集，结合课程资料、考点和选题历史筛选。
-    - title: 让答案经过执行核验
+    - title: 答案核验
       text: 核对公开样例，在 Linux 沙箱执行参考程序，生成教师使用的评测数据。
-    - title: 从生成继续走到交付
+    - title: 文件导出与平台保存
       text: 导出 Excel、JSON 与教师评测包，支持平台保存和回读核对，也可仅本地生成。
   metrics:
     - value: 97.26%

@@ -1,5 +1,5 @@
 ---
-title: Reliable Deep Research：让研究任务可恢复，让报告有据可查
+title: Reliable Deep Research：任务恢复与报告审核
 date: 2026-10-22 10:00:00
 updated: 2026-10-27 10:00:00
 categories:
@@ -8,35 +8,33 @@ tags:
   - AI Agent
   - LangGraph
   - Deep Research
-excerpt: 基于 Open Deep Research，增加持久化任务运行时、问题覆盖审核和有界语义修复。本文介绍设计取舍、开发评测结果，以及无需密钥的本地演示。
+excerpt: 在 Open Deep Research 上增加任务结果持久化、失败重试、问题覆盖检查和引用审核，附开发评测记录与本地运行方法。
 ---
 
-一次深度研究可能持续数分钟，反复调用模型和检索工具。如果进程中断，已经完成的任务能否继续使用？报告中的网址即使真实存在，能否支持它旁边的陈述？报告又是否回答了原问题的每个要点？
-
-Reliable Deep Research 尝试把这些问题变成可记录、可检查的工程过程。
+Reliable Deep Research 基于 LangChain Open Deep Research，主要增加了任务恢复和报告审核。研究任务的结果写入 SQLite，中断后可以复用已提交的结果；报告生成后，检查是否回答了问题要点，以及引用的证据是否支持对应段落。
 
 <div class="project-links"><a href="https://github.com/hilzlzl/reliable-deep-research" target="_blank" rel="noopener noreferrer">GitHub 源码 ↗</a><a href="/projects/#reliable-deep-research">项目概览 →</a><a href="/2026/10/22/reliable-deep-research-recovery/">任务恢复设计 →</a></div>
 
-## 从上游到这个项目
+## 与上游的区别
 
-项目基于 [LangChain Open Deep Research](https://github.com/langchain-ai/open_deep_research)。上游提供研究编排与模型、工具集成；这里增加持久化任务运行时，以及 **Evidence → 问题覆盖 → 已复核报告** 流水线。
+上游 [LangChain Open Deep Research](https://github.com/langchain-ai/open_deep_research) 提供研究编排及模型、工具集成。本项目保留这些功能，增加任务状态存储、证据管理和报告审核。
 
-使用的主要技术是 Python、LangGraph、asyncio、Pydantic 和 SQLite。改进重点有四个：
+主要使用 Python、LangGraph、asyncio、Pydantic 和 SQLite，新增功能包括：
 
-- **任务可恢复。** 有界 DAG 调度器持久化已完成任务与结果，重试失败任务，并清理未完成尝试遗留的过期证据。
-- **围绕问题组织报告。** 读取证据前先固定问题要点，检查缺口，再按存储片段审核段落。
-- **有界反馈修复。** 保留已核实段落，按当前审核意见修补答案和引用；最多 2 轮修复、2 个定向补搜任务。
-- **执行有边界。** 并发任务共享模型调用、token、任务尝试和时间预算，留下验收结果与事件轨迹。
+- 任务调度：以 DAG 管理依赖，持久化已完成结果，重试失败任务，清理未完成尝试留下的过期证据。
+- 报告审核：读取证据前固定问题要点，再检查覆盖情况，按存储片段审核段落。
+- 报告修复：保留已核实段落，按审核意见修改答案和引用，最多 2 轮修复、2 个定向补搜任务。
+- 预算管理：并发任务共享模型调用、token、任务尝试和时间预算，保存验收结果与事件日志。
 
-## 研究与报告如何衔接
+## 报告生成流程
 
 研究问题首先转成任务 DAG。检索任务产生证据，任务结果与证据进入 SQLite；报告生成环节根据固定的问题要点和这些证据编写草稿。
 
 随后，审核环节检查段落语义支持与问题覆盖。若有缺口，系统可以在剩余预算内安排定向补搜和修复；最后由 Evidence ID 确定性渲染引用。
 
-这两条约束需要同时成立：任务执行有可恢复的状态，报告陈述有可追溯的来源。后者仍依赖可能出错的模型语义判断，不能因为存在一条引用就认定陈述正确。
+引用可以追溯到存储的证据片段，但段落是否得到证据支持，仍由模型判断，可能出错。
 
-## 本次开发评测结果
+## 开发评测
 
 评测包含 30 道问题，每题 2 个评估槽位，共 60 个槽位，使用 24 份固定参考来源。Repository Baseline 沿用上游研究流程，并保留仓库中的检索、模型接入和预算等实验适配；Claim-first 是早期对照方案。
 
@@ -54,11 +52,11 @@ Reliable Deep Research 尝试把这些问题变成可记录、可检查的工程
 
 覆盖分子只统计通过报告，失败计零；引用支持来自每份报告最多 5 条陈述的抽样。这里同时列出“全部尝试覆盖”和“成功报告条件覆盖”，避免忽略失败报告。
 
-**结果的边界：** 参考要点由助手编写，生成和评审使用同一网关模型别名，尚无独立人工验证。表格展示开发后的实际交付结果，样本选择与配置变化限制了因果解释，不能据此直接推出对任意问题的普遍提升。
+参考要点由助手编写，生成和评审使用同一网关模型别名，尚无独立人工验证。两次实验存在配置变化，且表格替换了原未通过槽位，因此只能作为开发记录，不能据此判断一般情况下的效果提升。
 
 完整协议见[实验评测文档](https://github.com/hilzlzl/reliable-deep-research/blob/main/docs/evaluation.zh-CN.md)；全部 180 条评估样本见[公开对照记录](https://github.com/hilzlzl/reliable-deep-research/blob/main/benchmarks/results/release_comparison.json)。
 
-## 无需密钥的本地演示
+## 本地演示
 
 先从 [GitHub 仓库](https://github.com/hilzlzl/reliable-deep-research)克隆当前源码，安装 [uv](https://docs.astral.sh/uv/getting-started/installation/)，在项目根目录运行。命令适用于 PowerShell 和 Bash：
 
@@ -86,7 +84,7 @@ uv run --frozen python -m experiments.runners.run_research --question "What are 
 
 自定义 API、本地检索与产物说明见[运行指南](https://github.com/hilzlzl/reliable-deep-research/blob/main/docs/running.zh-CN.md)。旧的[博客源码快照 ZIP](/downloads/reliable-deep-research.zip)继续保留，对应提交 `a4e9b4c`；最新代码请以 GitHub 为准。
 
-## 阅读代码的入口
+## 代码位置
 
 | 文件 | 关注的问题 |
 | --- | --- |

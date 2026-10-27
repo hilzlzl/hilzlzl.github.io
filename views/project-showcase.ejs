@@ -1,28 +1,20 @@
 <div class="project-grid <%= compact ? 'project-grid--compact' : 'project-grid--full' %>">
   <% site.data.projects.forEach(function(project) { %>
     <article class="project-card project-card--<%= project.id %>" id="<%= compact ? 'featured-' : '' %><%= project.id %>" aria-labelledby="<%= compact ? 'featured-' : '' %><%= project.id %>-name">
-      <div class="project-visual" aria-label="<%= project.name %> 工作流程">
-        <div class="project-visual-top"><span><%= project.number %> / <%= project.category %></span><span class="project-open-source">OPEN SOURCE</span></div>
-        <div class="project-flow">
-          <div class="project-flow-input"><span class="flow-dot" aria-hidden="true"></span><%= project.input %></div>
-          <ol class="project-flow-stages"><% project.stages.forEach(function(stage) { %><li><%= stage %></li><% }) %></ol>
-          <div class="project-flow-output"><span aria-hidden="true">↳</span> <%= project.output %></div>
-        </div>
-        <div class="project-persistence"><span aria-hidden="true">↺</span> <%= project.persistence %></div>
-      </div>
       <div class="project-card-body">
         <p class="project-category"><%= project.category %></p>
         <h<%= compact ? '3' : '2' %> id="<%= compact ? 'featured-' : '' %><%= project.id %>-name"><a href="<%= url_for(project.article) %>"><%= project.name %></a></h<%= compact ? '3' : '2' %>>
-        <p class="project-tagline"><%= project.title %></p>
         <p class="project-description"><%= project.description %></p>
         <ul class="project-stack" aria-label="技术栈"><% project.stack.forEach(function(tech) { %><li><%= tech %></li><% }) %></ul>
         <% if (!compact) { %>
-          <div class="project-features"><% project.features.forEach(function(feature, index) { %><div><span class="feature-number">0<%= index + 1 %></span><div><h3><%= feature.title %></h3><p><%= feature.text %></p></div></div><% }) %></div>
-          <dl class="project-metrics"><% project.metrics.forEach(function(metric) { %><div><dt><%= metric.label %></dt><dd><%= metric.value %></dd></div><% }) %></dl>
+          <figure class="project-diagram"><figcaption>处理流程</figcaption><pre class="mermaid" aria-label="<%= project.name %> 处理流程"><%= project.diagram %></pre></figure>
+          <div class="project-features"><% project.features.forEach(function(feature) { %><div><h3><%= feature.title %></h3><p><%= feature.text %></p></div><% }) %></div>
+          <h3 class="project-results-title">实验记录</h3>
+          <table class="project-results"><thead><tr><th scope="col">指标</th><th scope="col">结果</th></tr></thead><tbody><% project.metrics.forEach(function(metric) { %><tr><th scope="row"><%= metric.label %></th><td><%= metric.value %></td></tr><% }) %></tbody></table>
           <p class="project-evaluation-note"><%= project.note %> <a href="<%= project.evaluation %>" target="_blank" rel="noopener noreferrer">查看评测口径 ↗</a></p>
         <% } %>
         <div class="project-actions">
-          <a class="project-action-primary" href="<%= url_for(project.article) %>">阅读项目介绍 <span aria-hidden="true">→</span></a>
+          <a class="project-action-primary" href="<%= url_for(project.article) %>">项目介绍 <span aria-hidden="true">→</span></a>
           <a href="<%= project.repo %>" target="_blank" rel="noopener noreferrer" aria-label="在 GitHub 查看 <%= project.name %> 源码">GitHub <span aria-hidden="true">↗</span></a>
           <% if (!compact) { %><a href="<%= project.docs %>" target="_blank" rel="noopener noreferrer">项目文档 <span aria-hidden="true">↗</span></a><% } %>
         </div>

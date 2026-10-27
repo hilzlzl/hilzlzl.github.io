@@ -6,17 +6,17 @@ page.banner_mask_alpha = page.banner_mask_alpha || theme.page.banner_mask_alpha;
 %>
 <div class="projects-page">
   <header class="projects-intro">
-    <p class="project-label">PROJECTS / 开源实践</p>
-    <h1>从一个问题开始，<br>把过程做扎实。</h1>
-    <p>从深度研究到课程作业，记录我在 Agent 工作流中的实践：<br class="desktop-break">让任务能够恢复，让结果可以追溯，让输出走到交付。</p>
-    <nav class="project-jump-links" aria-label="项目快捷导航"><% site.data.projects.forEach(function(project) { %><a href="#<%= project.id %>"><span><%= project.number %></span> <%= project.name %> <span aria-hidden="true">↓</span></a><% }) %></nav>
+    <h1>项目</h1>
+    <p>目前维护两个 Agent 项目：Reliable Deep Research 用于深度研究，CourseAgent 用于课程作业。这里整理功能、实验记录和源码链接。</p>
+    <nav class="project-jump-links" aria-label="项目快捷导航"><% site.data.projects.forEach(function(project) { %><a href="#<%= project.id %>"><%= project.name %> <span aria-hidden="true">↓</span></a><% }) %></nav>
   </header>
   <%- partial('_partials/project-showcase', { compact: false }) %>
   <section class="project-reading" aria-labelledby="project-reading-title">
-    <p class="project-label">BEHIND THE PROJECTS</p>
-    <h2 id="project-reading-title">继续读设计与实践</h2>
-    <a href="<%= url_for('/2026/10/22/reliable-deep-research-recovery/') %>"><span>工程设计</span>深度研究任务中断后，如何复用已经完成的工作 <span aria-hidden="true">↗</span></a>
-    <a href="<%= url_for('/2026/10/27/courseagent/') %>"><span>项目实践</span>CourseAgent：从课程需求到可核验的作业交付 <span aria-hidden="true">↗</span></a>
+    <h2 id="project-reading-title">相关文章</h2>
+    <a href="<%= url_for('/2026/10/22/reliable-deep-research-recovery/') %>">Reliable Deep Research 的任务恢复设计 <span aria-hidden="true">↗</span></a>
+    <a href="<%= url_for('/2026/10/27/courseagent/') %>">CourseAgent：课程作业生成与核验 <span aria-hidden="true">↗</span></a>
     <p>项目持续在 GitHub 更新，当前实现与运行方式以各仓库文档为准。</p>
   </section>
 </div>
+<script defer src="<%= url_for('/vendor/mermaid/mermaid.tiny.min.js') %>"></script>
+<script defer src="<%= url_for('/js/project-diagrams.js') %>"></script>
